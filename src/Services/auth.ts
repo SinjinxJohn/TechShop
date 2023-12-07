@@ -1,16 +1,16 @@
 import JWT from 'jsonwebtoken';
 const secret:string="Hotlinebling1!";
 
-interface User {
+interface Users {
     id: string;
-    salt:string;
+    // salt:string;
     fullname: string;
     email: string;
     password: string;
     phoneNumber: string;
   }
 
-function createTokenForUser(user:User):string{
+function createTokenForUser(user:Users):string{
     const payload = {
         _id:user.id,
         fullname:user.fullname,
@@ -26,4 +26,11 @@ function createTokenForUser(user:User):string{
 function validateToken(token:string){
     const payload = JWT.verify(token,secret);
 }
-export { User, createTokenForUser, validateToken };
+
+export interface UserPayload {
+    // Define the structure of your user payload here
+    _id: string;
+    email: string;
+    // Add other properties if needed
+  }
+export { Users, createTokenForUser, validateToken };
